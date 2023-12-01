@@ -1,17 +1,25 @@
-# Use the DNA Center API documentation to help you fix this authentication code snippet https://developer.cisco.com/docs/dna-center/#!authentication-api
-# Once fixed you should see a token printed to the console.
+# Fix this loop so that it runs and if the user enters their credentials incorrectly 3 times, they receive an access denied message.
+# If they enter the correct details they receive an access granted message and the terminal program exits.
 
-import requests
-import urllib3
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+def main():
+    login_attempts = 0
+    max_attempts = 3
 
-url = "https://sandboxdnac.cisco.com/dna/system/api/v1/authenticationAPI/token"
+    username = "admin"
+    password = "cisco123"
 
-payload = {}
-headers = {
-    'Authorization': 'Standard ZGV2bmV0dXNlcjpDaXNjbzEyMyE='
-    }
+    while login_attempts < max_attempts:
+        name_input = int(input("Enter your username: "))
+        password_input = int(input("Enter your password: "))
 
-response = requests.request('method', url, headers=headers, data = payload, verify=False)
-print(response.text)
+        if name_input == username and password_input == password:
+            print("\nAccess granted")
+        else:
+            login_attempts += 1
+            print("\nIncorrect Credentials. Please try again.")
+            
+    if login_attempts == max_attempts:
+        print("\nAccess denied.\n")
 
+if "__name__" == "__main__":
+    main()
